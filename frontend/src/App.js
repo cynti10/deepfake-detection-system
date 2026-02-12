@@ -6,9 +6,15 @@ function App() {
   const [file, setFile] = useState(null);
   const [result, setResult] = useState(null);
   const [type, setType] = useState('image'); // image, video, audio
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleUpload = async () => {
-    if (!file) return;
+    setErrorMsg('');
+    setResult(null);
+    if (!file) {
+      setErrorMsg('Please select a file first.');
+      return;
+    }
     const formData = new FormData();
     formData.append('file', file);
 
@@ -19,9 +25,11 @@ function App() {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setResult(response.data);
+      setErrorMsg('');
     } catch (error) {
       console.error(error);
-      alert("Error detecting file");
+      const apiMsg = error?.response?.data?.error || 'Error detecting file. Ensure the corresponding model is loaded on the backend.';
+      setErrorMsg(apiMsg);
     }
   };
 
@@ -48,6 +56,12 @@ function App() {
         <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '20px' }}>
           <h2>Result: {result.result}</h2>
           <p>Confidence: {(result.confidence * 100).toFixed(2)}%</p>
+        </div>
+      )}
+
+      {errorMsg && (
+        <div style={{ marginTop: '20px', color: 'red' }}>
+          <strong>{errorMsg}</strong>
         </div>
       )}
     </div>
