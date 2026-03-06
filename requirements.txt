@@ -1,0 +1,10 @@
+# Deepfake Detection System - unified runtime requirements
+# Install with: pip install -r requirements.txt
+Flask==3.1.2
+Flask-Cors==6.0.1
+Werkzeug==3.1.4
+tensorflow==2.20.0
+numpy==2.0.2
+opencv-python==4.13.0.92
+librosa==0.11.0
+gunicorn==23.0.0
