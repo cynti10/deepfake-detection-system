@@ -1,12 +1,12 @@
 # Arti-fact
 
-Arti-fact is a production-style deepfake detection platform with a modern React frontend and a TensorFlow-powered Flask API backend for image and audio analysis.
+Arti-fact is a production-style deepfake detection platform with a modern React frontend and a Flask API backend that uses PyTorch runtimes for image, audio, and video analysis.
 
 ## Features
 - Multi-mode frontend with dedicated pages for:
   - Image deepfake detection
   - Audio deepfake detection
-  - Video detection placeholder (UI space reserved)
+  - Video deepfake detection
 - Real-time prediction output:
   - Verdict (`REAL` / `FAKE`)
   - Confidence score
@@ -79,7 +79,7 @@ Frontend will run on `http://localhost:3000`.
 ## API Endpoints
 - `POST /detect-image`
 - `POST /detect-audio`
-- `POST /detect-video` (reserved route in backend)
+- `POST /detect-video`
 - `GET /health`
 
 All detect endpoints accept `multipart/form-data` with key: `file`.
@@ -99,8 +99,16 @@ Optional frontend API URL override:
 
 ## Model Notes
 Expected model files in `backend/models/`:
-- `deepfake_image_model.keras` or `.h5`
-- `deepfake_audio_model.keras` or `.h5`
+- `imageguard_v2_finetuned.pt` (preferred) or `imageguard_v2_best.pt`
+- `rawnet3_fsat_finetuned.pt` (preferred) or `rawnet3_fsat_best.pt`
+- `video_best_model.pt`
+
+If `.pt` files are tracked with Git LFS, fetch the real binaries before running backend:
+
+```bash
+git lfs install
+git lfs pull
+```
 
 ## Production Notes
 - Flask dev server (`python app.py`) is for development only.
@@ -110,6 +118,7 @@ Expected model files in `backend/models/`:
 ## Troubleshooting
 - If frontend cannot connect: verify backend is running on port `5000`.
 - If detections fail: check `http://localhost:5000/health` for model load status.
+- If health shows Git LFS pointer errors for `.pt` models: run `git lfs pull` and restart backend.
 - If upload fails: verify file type matches selected detection mode.
 
 Quick backend checks:

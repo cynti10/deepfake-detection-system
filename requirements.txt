@@ -3,8 +3,10 @@
 Flask==3.1.2
 Flask-Cors==6.0.1
 Werkzeug==3.1.4
-tensorflow==2.20.0
 numpy==2.0.2
 opencv-python==4.13.0.92
 librosa==0.11.0
 gunicorn==23.0.0
+torch==2.8.0
+torchvision==0.23.0
+timm==1.0.19
