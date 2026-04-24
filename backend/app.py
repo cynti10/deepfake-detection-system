@@ -1,7 +1,10 @@
 import os
+import hashlib
+import hmac
 import threading
 import time
 import uuid
+from pathlib import Path
 
 import cv2
 import librosa
@@ -9,6 +12,8 @@ import numpy as np
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+
+from adversarial_pipeline import AdversarialBackgroundService
 
 try:
     import torch
@@ -50,6 +55,7 @@ image_torch_model = None
 audio_torch_model = None
 video_torch_model = None
 video_cfg = {}
+adversarial_service = None
 
 
 def _register_model_error(name, err):
@@ -515,6 +521,92 @@ def _result_from_fake_prob(fake_prob):
     return label, conf
 
 
+def _forensics_enabled():
+    return os.getenv("FORENSICS_METADATA_ENABLED", "true").lower() == "true"
+
+
+def _hmac_secret():
+    return os.getenv("EVIDENCE_HMAC_SECRET", "").encode("utf-8")
+
+
+def _build_cryptographic_evidence(path, modality, fake_prob):
+    evidence = {
+        "modality": modality,
+        "timestamp": time.time(),
+        "sha256": None,
+        "signature": None,
+        "signed": False,
+    }
+    try:
+        with open(path, "rb") as f:
+            data = f.read()
+        digest = hashlib.sha256(data).hexdigest()
+        evidence["sha256"] = digest
+
+        secret = _hmac_secret()
+        if secret:
+            msg = f"{modality}|{digest}|{fake_prob:.8f}".encode("utf-8")
+            evidence["signature"] = hmac.new(secret, msg, hashlib.sha256).hexdigest()
+            evidence["signed"] = True
+    except Exception as e:
+        evidence["error"] = str(e)
+
+    return evidence
+
+
+def _image_metadata_forensics(path):
+    img = cv2.imread(path)
+    if img is None:
+        return {"valid": False, "reason": "unreadable image"}
+    h, w = img.shape[:2]
+    suspicious = h < 80 or w < 80 or h > 8000 or w > 8000
+    return {
+        "valid": True,
+        "width": int(w),
+        "height": int(h),
+        "suspicious": bool(suspicious),
+    }
+
+
+def _audio_metadata_forensics(path):
+    try:
+        duration = float(librosa.get_duration(path=path))
+        sr = int(librosa.get_samplerate(path))
+        suspicious = duration <= 0.2 or duration > 600.0 or sr < 8000 or sr > 96000
+        return {
+            "valid": True,
+            "duration_sec": duration,
+            "sample_rate": sr,
+            "suspicious": bool(suspicious),
+        }
+    except Exception as e:
+        return {"valid": False, "reason": str(e)}
+
+
+def _video_metadata_forensics(path):
+    cap = cv2.VideoCapture(path)
+    if not cap.isOpened():
+        return {"valid": False, "reason": "unreadable video"}
+    try:
+        fps = float(cap.get(cv2.CAP_PROP_FPS) or 0.0)
+        frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
+        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH) or 0)
+        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT) or 0)
+        duration = float(frames / fps) if fps > 0 else 0.0
+        suspicious = fps <= 0 or duration <= 0.2 or width < 80 or height < 80
+        return {
+            "valid": True,
+            "fps": fps,
+            "frame_count": frames,
+            "duration_sec": duration,
+            "width": width,
+            "height": height,
+            "suspicious": bool(suspicious),
+        }
+    finally:
+        cap.release()
+
+
 def _frame_indices(frame_count, num_frames):
     if frame_count <= 0:
         return []
@@ -562,6 +654,30 @@ def _predict_image_fake_prob_from_bgr(frame_bgr):
             return _torch_output_to_fake_probability(out)
 
     return None
+
+
+def _get_live_models():
+    with model_lock:
+        return {
+            "image": image_torch_model,
+            "audio": audio_torch_model,
+            "video": video_torch_model,
+        }
+
+
+def _swap_live_model(modality, new_model, model_name):
+    global image_torch_model, audio_torch_model, video_torch_model
+    with model_lock:
+        if modality == "image":
+            image_torch_model = new_model.eval()
+        elif modality == "audio":
+            audio_torch_model = new_model.eval()
+        elif modality == "video":
+            video_torch_model = new_model.eval()
+        else:
+            raise ValueError(f"Unknown modality for swap: {modality}")
+
+        active_models[modality] = model_name
 
 
 # ----------------------
@@ -648,6 +764,23 @@ if active_models["video"] is None:
     print("⚠️ No video model loaded.")
 
 
+if TORCH_AVAILABLE and TORCH_DEVICE is not None:
+    try:
+        adversarial_service = AdversarialBackgroundService.from_env(
+            base_dir=Path(BASE_DIR),
+            model_dir=Path(MODEL_DIR),
+            model_lock=model_lock,
+            torch_available=TORCH_AVAILABLE,
+            torch_device=TORCH_DEVICE,
+            get_models_fn=_get_live_models,
+            swap_model_fn=_swap_live_model,
+        )
+        adversarial_service.start()
+        print("✅ Background adversarial pipeline started.")
+    except Exception as e:
+        _register_model_error("adversarial_pipeline", e)
+
+
 # ----------------------
 # API endpoints
 # ----------------------
@@ -674,7 +807,11 @@ def detect_image():
             return jsonify({"error": "Image model inference unavailable"}), 503
 
         label, conf = _result_from_fake_prob(fake_prob)
-        return jsonify({"result": label, "confidence": float(conf)})
+        response = {"result": label, "confidence": float(conf), "fake_probability": float(fake_prob)}
+        if _forensics_enabled():
+            response["metadata_forensics"] = _image_metadata_forensics(path)
+        response["cryptographic_evidence"] = _build_cryptographic_evidence(path, "image", fake_prob)
+        return jsonify(response)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:
@@ -713,7 +850,11 @@ def detect_video():
                     fake_prob = float(torch.sigmoid(logits).item())
 
         label, conf = _result_from_fake_prob(fake_prob)
-        return jsonify({"result": label, "confidence": conf, "fake_probability": fake_prob})
+        response = {"result": label, "confidence": conf, "fake_probability": fake_prob}
+        if _forensics_enabled():
+            response["metadata_forensics"] = _video_metadata_forensics(path)
+        response["cryptographic_evidence"] = _build_cryptographic_evidence(path, "video", fake_prob)
+        return jsonify(response)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:
@@ -763,7 +904,11 @@ def detect_audio():
                     fake_prob = _torch_output_to_fake_probability(out)
 
                 label, conf = _result_from_fake_prob(fake_prob)
-                return jsonify({"result": label, "confidence": conf})
+                response = {"result": label, "confidence": conf, "fake_probability": float(fake_prob)}
+                if _forensics_enabled():
+                    response["metadata_forensics"] = _audio_metadata_forensics(path)
+                response["cryptographic_evidence"] = _build_cryptographic_evidence(path, "audio", fake_prob)
+                return jsonify(response)
 
         return jsonify({"error": "Audio model inference unavailable"}), 503
     except Exception as e:
@@ -778,6 +923,10 @@ def detect_audio():
 
 @app.route("/health", methods=["GET"])
 def health():
+    adv_status = {"status": "disabled"}
+    if adversarial_service is not None:
+        adv_status = adversarial_service.get_status()
+
     return jsonify(
         {
             "torch_available": TORCH_AVAILABLE,
@@ -786,6 +935,56 @@ def health():
             "audio_model": active_models["audio"] or "MISSING",
             "video_model": active_models["video"] or "MISSING",
             "errors": model_load_errors,
+            "adversarial_pipeline": adv_status,
+            "synopsis_alignment": {
+                "dual_loop": True,
+                "multimodal_detection": True,
+                "metadata_forensics": _forensics_enabled(),
+                "cryptographic_evidence": True,
+                "edge_exports": {
+                    "onnx": os.getenv("EDGE_EXPORT_ONNX_ENABLED", "true").lower() == "true",
+                    "tflite": os.getenv("EDGE_EXPORT_TFLITE_ENABLED", "false").lower() == "true",
+                },
+            },
+        }
+    )
+
+
+@app.route("/adversarial-status", methods=["GET"])
+def adversarial_status():
+    if adversarial_service is None:
+        return jsonify({"status": "disabled"})
+    return jsonify(adversarial_service.get_status())
+
+
+@app.route("/verify-evidence", methods=["POST"])
+def verify_evidence():
+    data = request.get_json(silent=True) or {}
+    modality = str(data.get("modality", ""))
+    sha256_hex = str(data.get("sha256", ""))
+    signature = str(data.get("signature", ""))
+    fake_probability = float(data.get("fake_probability", 0.0))
+
+    secret = _hmac_secret()
+    if not secret:
+        return jsonify({"verified": False, "error": "EVIDENCE_HMAC_SECRET not configured"}), 400
+    if not modality or not sha256_hex or not signature:
+        return jsonify({"verified": False, "error": "modality, sha256, signature are required"}), 400
+
+    msg = f"{modality}|{sha256_hex}|{fake_probability:.8f}".encode("utf-8")
+    expected = hmac.new(secret, msg, hashlib.sha256).hexdigest()
+    verified = hmac.compare_digest(expected, signature)
+    return jsonify({"verified": bool(verified), "expected_signature": expected if not verified else None})
+
+
+@app.route("/edge-deployment-status", methods=["GET"])
+def edge_deployment_status():
+    return jsonify(
+        {
+            "onnx_enabled": os.getenv("EDGE_EXPORT_ONNX_ENABLED", "true").lower() == "true",
+            "tflite_enabled": os.getenv("EDGE_EXPORT_TFLITE_ENABLED", "false").lower() == "true",
+            "target_platforms": ["linux", "android", "ios"],
+            "formats": ["onnx", "tflite"],
         }
     )
 
