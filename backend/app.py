@@ -13,6 +13,7 @@ from werkzeug.utils import secure_filename
 try:
     import torch
     import torch.nn as nn
+    import torch.nn.functional as F
     from torch.amp import autocast
     import timm
 
@@ -78,6 +79,23 @@ def _existing_non_pointer(paths):
     return out
 
 
+def _extract_state_dict(obj):
+    if isinstance(obj, dict):
+        if "model_state_dict" in obj and isinstance(obj["model_state_dict"], dict):
+            return obj["model_state_dict"]
+        if "state_dict" in obj and isinstance(obj["state_dict"], dict):
+            return obj["state_dict"]
+    return None
+
+
+def _extract_checkpoint_config(obj):
+    if isinstance(obj, dict):
+        cfg = obj.get("config")
+        if isinstance(cfg, dict):
+            return cfg
+    return {}
+
+
 def _load_torch_inference_model(path, model_tag):
     if not TORCH_AVAILABLE:
         return None
@@ -101,12 +119,18 @@ def _load_torch_inference_model(path, model_tag):
                     maybe_model.eval()
                     return maybe_model
 
-                if "model_state_dict" in obj or "state_dict" in obj:
+                state_dict = _extract_state_dict(obj)
+                if state_dict is not None:
+                    cfg = _extract_checkpoint_config(obj)
+                    rebuilt = _build_model_from_state_dict(model_tag, state_dict, cfg)
+                    if rebuilt is not None:
+                        rebuilt.eval()
+                        return rebuilt
                     _register_model_error(
                         os.path.basename(path),
                         (
-                            f"{model_tag} checkpoint contains weights only (state_dict) without model architecture. "
-                            "Export a scripted module (.pt) for inference deployment, or provide architecture code in backend."
+                            f"{model_tag} checkpoint contains state_dict, but backend could not rebuild matching architecture. "
+                            "Check checkpoint config or architecture assumptions."
                         ),
                     )
                     return None
@@ -134,6 +158,224 @@ def _load_torch_inference_model(path, model_tag):
 # Torch model components
 # ----------------------
 if TORCH_AVAILABLE:
+
+    class ImageGuardV2(nn.Module):
+        def __init__(
+            self,
+            spatial_backbone="tf_efficientnet_b4_ns",
+            freq_backbone="mobilenetv3_small_050",
+            head_hidden=(512, 128),
+            dropout=0.25,
+        ):
+            super().__init__()
+            self.spatial = timm.create_model(
+                spatial_backbone,
+                pretrained=False,
+                num_classes=0,
+                global_pool="avg",
+                in_chans=3,
+            )
+            self.freq = timm.create_model(
+                freq_backbone,
+                pretrained=False,
+                num_classes=0,
+                global_pool="avg",
+                in_chans=1,
+            )
+
+            with torch.no_grad():
+                d_spatial = self.spatial(torch.zeros(1, 3, 224, 224)).shape[1]
+                d_freq = self.freq(torch.zeros(1, 1, 224, 224)).shape[1]
+                feat_dim = d_spatial + d_freq
+
+            h1, h2 = head_hidden
+            self.head = nn.Sequential(
+                nn.Linear(feat_dim, h1),
+                nn.ReLU(inplace=True),
+                nn.Dropout(dropout),
+                nn.Linear(h1, h2),
+                nn.ReLU(inplace=True),
+                nn.Dropout(dropout),
+                nn.Linear(h2, 1),
+            )
+
+        def forward(self, x):
+            # x: [B, 3, H, W]
+            spatial_feat = self.spatial(x)
+            gray = 0.2989 * x[:, 0:1] + 0.5870 * x[:, 1:2] + 0.1140 * x[:, 2:3]
+            fft = torch.fft.fft2(gray)
+            mag = torch.log1p(torch.abs(fft))
+            mn = mag.amin(dim=(2, 3), keepdim=True)
+            mx = mag.amax(dim=(2, 3), keepdim=True)
+            freq_in = (mag - mn) / (mx - mn + 1e-6)
+            freq_feat = self.freq(freq_in)
+            fused = torch.cat([spatial_feat, freq_feat], dim=1)
+            return self.head(fused).squeeze(1)
+
+
+    class SincConv1D(nn.Module):
+        def __init__(self, out_channels=128, kernel_size=251, sample_rate=16000):
+            super().__init__()
+            if kernel_size % 2 == 0:
+                raise ValueError("SincConv kernel_size must be odd")
+
+            self.out_channels = out_channels
+            self.kernel_size = kernel_size
+            self.sample_rate = float(sample_rate)
+
+            low_hz = torch.linspace(30.0, self.sample_rate / 2.0 - 100.0, out_channels).view(-1, 1)
+            band_hz = torch.full((out_channels, 1), 80.0)
+
+            self.low_hz_ = nn.Parameter(low_hz)
+            self.band_hz_ = nn.Parameter(band_hz)
+
+            half = (kernel_size - 1) // 2
+            n = torch.arange(1, half + 1, dtype=torch.float32).view(1, -1)
+            window = torch.hamming_window(half, periodic=False, dtype=torch.float32)
+            self.register_buffer("n_", n)
+            self.register_buffer("window_", window)
+
+        def forward(self, x):
+            # x: [B, 1, T]
+            min_low_hz = 30.0
+            min_band_hz = 50.0
+
+            low = min_low_hz + torch.abs(self.low_hz_)
+            high = torch.clamp(low + min_band_hz + torch.abs(self.band_hz_), max=self.sample_rate / 2.0 - 1.0)
+            band = high - low
+
+            n = self.n_.to(x.device)
+            window = self.window_.to(x.device)
+            t_right = n / self.sample_rate
+
+            def sinc(z):
+                return torch.sin(z) / (z + 1e-8)
+
+            low_term = 2.0 * low * sinc(2.0 * np.pi * low * t_right)
+            high_term = 2.0 * high * sinc(2.0 * np.pi * high * t_right)
+            band_pass_right = (high_term - low_term) * window
+            center = 2.0 * band
+            band_pass = torch.cat([torch.flip(band_pass_right, dims=[1]), center, band_pass_right], dim=1)
+            band_pass = band_pass / (2.0 * band + 1e-8)
+            filters = band_pass.view(self.out_channels, 1, self.kernel_size)
+            return F.conv1d(x, filters, stride=1, padding=self.kernel_size // 2, bias=None)
+
+
+    class RawNetResidualBlock(nn.Module):
+        def __init__(self, in_ch, out_ch):
+            super().__init__()
+            self.conv = nn.Sequential(
+                nn.Conv1d(in_ch, out_ch, kernel_size=3, stride=1, padding=1, bias=False),
+                nn.BatchNorm1d(out_ch),
+                nn.LeakyReLU(0.2, inplace=True),
+                nn.Conv1d(out_ch, out_ch, kernel_size=3, stride=1, padding=1, bias=False),
+                nn.BatchNorm1d(out_ch),
+            )
+            self.skip = nn.Sequential(
+                nn.Conv1d(in_ch, out_ch, kernel_size=1, stride=1, padding=0, bias=False),
+                nn.BatchNorm1d(out_ch),
+            )
+            self.act = nn.LeakyReLU(0.2, inplace=True)
+
+        def forward(self, x):
+            y = self.conv(x)
+            s = self.skip(x)
+            return self.act(y + s)
+
+
+    class AttentiveStatsPool1D(nn.Module):
+        def __init__(self, channels=256, bottleneck=128):
+            super().__init__()
+            self.attn = nn.Sequential(
+                nn.Conv1d(channels, bottleneck, kernel_size=1),
+                nn.Tanh(),
+                nn.Conv1d(bottleneck, channels, kernel_size=1),
+            )
+
+        def forward(self, x):
+            # x: [B, C, T]
+            w = torch.softmax(self.attn(x), dim=2)
+            mu = torch.sum(w * x, dim=2)
+            var = torch.sum(w * (x - mu.unsqueeze(2)) ** 2, dim=2)
+            std = torch.sqrt(var.clamp_min(1e-6))
+            return torch.cat([mu, std], dim=1)
+
+
+    class RawNet3FSAT(nn.Module):
+        def __init__(self, sample_rate=16000):
+            super().__init__()
+            self.sinc = SincConv1D(out_channels=128, kernel_size=251, sample_rate=sample_rate)
+            self.bn0 = nn.BatchNorm1d(128)
+
+            chs = [128, 256, 256, 256, 256]
+            blocks = []
+            in_ch = 128
+            for out_ch in chs:
+                blocks.append(RawNetResidualBlock(in_ch, out_ch))
+                in_ch = out_ch
+            self.encoder = nn.ModuleList(blocks)
+
+            self.asp = AttentiveStatsPool1D(channels=256, bottleneck=128)
+            self.bn_asp = nn.BatchNorm1d(512)
+            self.classifier = nn.Sequential(
+                nn.Linear(512, 256),
+                nn.ReLU(inplace=True),
+                nn.Dropout(0.3),
+                nn.Linear(256, 1),
+            )
+
+        def forward(self, x):
+            # x: [B, T] or [B, 1, T]
+            if x.dim() == 2:
+                x = x.unsqueeze(1)
+            elif x.dim() != 3:
+                raise ValueError("RawNet3FSAT expects [B, T] or [B, 1, T]")
+
+            x = self.sinc(x)
+            x = torch.abs(x)
+            x = self.bn0(x)
+            x = F.leaky_relu(x, negative_slope=0.2)
+
+            for block in self.encoder:
+                x = block(x)
+                x = F.max_pool1d(x, kernel_size=3, stride=3, ceil_mode=True)
+
+            x = self.asp(x)
+            x = self.bn_asp(x)
+            return self.classifier(x).squeeze(1)
+
+
+    def _parse_imageguard_backbones_from_cfg(cfg):
+        model_name = cfg.get("model", "") if isinstance(cfg, dict) else ""
+        spatial_name = "tf_efficientnet_b4_ns"
+        freq_name = "mobilenetv3_small_050"
+        if isinstance(model_name, str) and "+" in model_name:
+            left, right = model_name.split("+", 1)
+            if left.strip():
+                spatial_name = left.strip()
+            if right.strip():
+                freq_name = right.strip()
+        return spatial_name, freq_name
+
+
+    def _build_model_from_state_dict(model_tag, state_dict, cfg):
+        try:
+            if model_tag == "image":
+                spatial_name, freq_name = _parse_imageguard_backbones_from_cfg(cfg)
+                model = ImageGuardV2(spatial_backbone=spatial_name, freq_backbone=freq_name).to(TORCH_DEVICE)
+                model.load_state_dict(state_dict, strict=True)
+                return model
+
+            if model_tag == "audio":
+                sample_rate = int(cfg.get("sr", 16000)) if isinstance(cfg, dict) else 16000
+                model = RawNet3FSAT(sample_rate=sample_rate).to(TORCH_DEVICE)
+                model.load_state_dict(state_dict, strict=True)
+                return model
+        except Exception as rebuild_err:
+            _register_model_error(f"{model_tag}_state_dict_rebuild", rebuild_err)
+            return None
+
+        return None
 
     def rgb_to_fft_mag(x):
         # x: [B, T, C, H, W]
