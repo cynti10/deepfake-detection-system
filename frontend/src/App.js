@@ -25,7 +25,7 @@ const DETECTION_OPTIONS = [
   {
     key: 'video',
     title: 'Video Detection',
-    description: 'Video pipeline will be added next. Space is reserved for rollout.',
+    description: 'Upload a video and run temporal deepfake detection with confidence scoring.',
     route: '/video',
     endpoint: '/detect-video',
     accept: 'video/*'
@@ -43,7 +43,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/image" element={<DetectionPage mode="image" />} />
             <Route path="/audio" element={<DetectionPage mode="audio" />} />
-            <Route path="/video" element={<VideoComingSoon />} />
+            <Route path="/video" element={<DetectionPage mode="video" />} />
           </Routes>
         </main>
       </div>
@@ -85,7 +85,7 @@ function HomePage() {
         <h1>Choose your detection mode</h1>
         <p>
           Select a detector, upload media, and receive an instant prediction with confidence score.
-          Image and audio are fully connected to backend models.
+          Image, audio, and video routes are connected to backend models.
         </p>
       </div>
 
@@ -269,21 +269,6 @@ function ResultCard({ result }) {
       </div>
       <p className="confidence-text">Confidence score: {percent.toFixed(2)}%</p>
     </div>
-  );
-}
-
-function VideoComingSoon() {
-  return (
-    <section className="detector-page">
-      <div className="detector-panel glass">
-        <h2>Video Detection</h2>
-        <p>
-          This module is reserved and will be enabled once the production video model is finalized.
-          Layout, navigation, and API path are already prepared.
-        </p>
-        <div className="coming-soon">Coming Soon</div>
-      </div>
-    </section>
   );
 }
 
