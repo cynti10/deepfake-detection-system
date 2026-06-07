@@ -18,7 +18,7 @@ SEED=42; SR=16000; DURATION=4.0; N_SAMPLES=int(SR*DURATION)
 BATCH_SIZE=24; EPOCHS=50; LR=1e-4; WEIGHT_DECAY=1e-4; PATIENCE=10
 GAMMA=0.1; EPSILON=0.01; F_LOW=4000; F_HIGH=8000; N_FFT=1024
 
-BASE_DIR=os.path.expanduser('~/deepfake_project/audio')
+BASE_DIR=os.getenv('DEEPFAKE_AUDIO_BASE_DIR', os.path.expanduser('~/deepfake_project/audio'))
 DATA_DIR=os.path.join(BASE_DIR,'data')
 CKPT_DIR=os.path.join(BASE_DIR,'checkpoints')
 LOG_DIR=os.path.join(BASE_DIR,'logs')

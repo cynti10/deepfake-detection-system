@@ -1,0 +1,17 @@
+nohup: ignoring input
+Loading ImageGuard V2 checkpoint...
+  Loaded perfectly — strict match
+  Dev AUC at load: 0.9991989225680759
+  Forward pass sanity check passed — output shape torch.Size([2])
+
+Scanning /home/rit/deepfake_project/image/test_data ...
+  Found 193,804 images — real=99,217  fake=94,587
+  Split: Train 155,046 | Dev 19,379 | Eval 19,379
+
+=================================================================
+  ImageGuard — Phase 3 Adversarial Training
+=================================================================
+Device     : cuda  |  AMP: True
+Backbone   : EfficientNet-B5 (spatial) + B2-lite (freq)
+FGSM ε=0.008  PGD ε=0.015/5-step  adv_ratio=0.4
+Starting from Dev AUC 0.9992 — small LR, conservative ε

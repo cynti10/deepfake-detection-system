@@ -1,0 +1,16 @@
+nohup: ignoring input
+=================================================================
+  AudioGuard RawNet3 — Phase 3c PGD-Curriculum Hardening
+=================================================================
+Device: cuda | AMP: True
+Curriculum: FGSM-dominant → mixed → PGD-20 dominant
+Input: rawnet3_phase3c.pt  →  Output: rawnet3_phase3d.pt
+
+Traceback (most recent call last):
+  File "/home/rit/deepfake_project/audio/scripts/phase3c_adversarial.py", line 381, in <module>
+    main()
+  File "/home/rit/deepfake_project/audio/scripts/phase3c_adversarial.py", line 244, in main
+    model = load_model(IN_CKPT)
+  File "/home/rit/deepfake_project/audio/scripts/phase3c_adversarial.py", line 195, in load_model
+    model = RawNet3FSAT().to(DEVICE)
+NameError: name 'RawNet3FSAT' is not defined

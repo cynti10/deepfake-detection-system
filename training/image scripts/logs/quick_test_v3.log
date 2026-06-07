@@ -1,0 +1,67 @@
+/home/rit/miniconda/envs/ritaml/lib/python3.10/site-packages/albumentations/__init__.py:24: UserWarning: A new version of Albumentations is available: 2.0.8 (you have 1.4.24). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+  check_for_updates()
+Model loaded — Phase 1 AUC 0.9986
+
+============================================================
+  ImageGuard v2 — Quick External Test (5k cap/dataset)
+============================================================
+
+🟢 ciplab_faces
+   Images  : 3,840 (1,920 real + 1,920 fake)
+   AUC     : 0.9939
+   Accuracy: 0.9693
+   F1      : 0.9690
+              precision    recall  f1-score   support
+
+        Real      0.960     0.979     0.970      1920
+        Fake      0.979     0.959     0.969      1920
+
+    accuracy                          0.969      3840
+   macro avg      0.969     0.969     0.969      3840
+weighted avg      0.969     0.969     0.969      3840
+
+
+🔴 dfd_frames
+   Images  : 5,000 (2,500 real + 2,500 fake)
+   AUC     : 0.5195
+   Accuracy: 0.5084
+   F1      : 0.2182
+              precision    recall  f1-score   support
+
+        Real      0.505     0.880     0.641      2500
+        Fake      0.533     0.137     0.218      2500
+
+    accuracy                          0.508      5000
+   macro avg      0.519     0.508     0.430      5000
+weighted avg      0.519     0.508     0.430      5000
+
+
+🟢 wilddeepfake
+   Images  : 5,000 (2,500 real + 2,500 fake)
+   AUC     : 0.9995
+   Accuracy: 0.9918
+   F1      : 0.9918
+              precision    recall  f1-score   support
+
+        Real      0.990     0.994     0.992      2500
+        Fake      0.994     0.990     0.992      2500
+
+    accuracy                          0.992      5000
+   macro avg      0.992     0.992     0.992      5000
+weighted avg      0.992     0.992     0.992      5000
+
+
+============================================================
+  SUMMARY
+============================================================
+  Dataset                            AUC     Acc      F1  Status
+  --------------------------------------------------------
+  ciplab_faces                    0.9939  0.9693  0.9690  ✅ GO
+  dfd_frames                      0.5195  0.5084  0.2182  🔴 NEED FT
+  wilddeepfake                    0.9995  0.9918  0.9918  ✅ GO
+
+  ✅ GO     = proceed to video model
+  ⚠️  FT    = optional fine-tune overnight
+  🔴 NEED FT = fine-tune before video model
+
+Saved: /home/rit/deepfake_project/image/logs/quick_test_results.json

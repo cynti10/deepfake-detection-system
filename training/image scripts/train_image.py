@@ -49,7 +49,7 @@ class CFG:
 
 cfg = CFG()
 
-BASE_DIR  = Path.home() / 'deepfake_project/image'
+BASE_DIR  = Path(os.getenv('DEEPFAKE_IMAGE_BASE_DIR', str(Path.home() / 'deepfake_project/image')))
 DATA_DIR  = BASE_DIR / 'data'
 CKPT_DIR  = BASE_DIR / 'checkpoints'
 LOG_DIR   = BASE_DIR / 'logs'

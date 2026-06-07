@@ -1,0 +1,8 @@
+{
+  "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs11.mp4",
+  "checkpoint": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\models\\video_best_model.pt",
+  "frames_used": 16,
+  "real_probability": 0.0014897669898346066,
+  "fake_probability": 0.9985102330101654,
+  "prediction": "fake"
+}

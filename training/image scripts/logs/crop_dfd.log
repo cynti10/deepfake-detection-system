@@ -1,0 +1,58 @@
+MTCNN loaded on cuda ✓
+
+real: 5,000 files → /home/rit/deepfake_project/image/test_data/dfd_frames_cropped/real
+    200/5000  saved=199  no_face=1  err=0
+    400/5000  saved=398  no_face=2  err=0
+    600/5000  saved=597  no_face=3  err=0
+    800/5000  saved=797  no_face=3  err=0
+   1000/5000  saved=994  no_face=6  err=0
+   1200/5000  saved=1193  no_face=7  err=0
+   1400/5000  saved=1391  no_face=9  err=0
+   1600/5000  saved=1591  no_face=9  err=0
+   1800/5000  saved=1789  no_face=11  err=0
+   2000/5000  saved=1989  no_face=11  err=0
+   2200/5000  saved=2186  no_face=14  err=0
+   2400/5000  saved=2381  no_face=19  err=0
+   2600/5000  saved=2581  no_face=19  err=0
+   2800/5000  saved=2779  no_face=21  err=0
+   3000/5000  saved=2977  no_face=23  err=0
+   3200/5000  saved=3176  no_face=24  err=0
+   3400/5000  saved=3376  no_face=24  err=0
+   3600/5000  saved=3574  no_face=26  err=0
+   3800/5000  saved=3774  no_face=26  err=0
+   4000/5000  saved=3974  no_face=26  err=0
+   4200/5000  saved=4172  no_face=28  err=0
+   4400/5000  saved=4370  no_face=30  err=0
+   4600/5000  saved=4570  no_face=30  err=0
+   4800/5000  saved=4764  no_face=36  err=0
+   5000/5000  saved=4963  no_face=37  err=0
+
+fake: 5,000 files → /home/rit/deepfake_project/image/test_data/dfd_frames_cropped/fake
+    200/5000  saved=5163  no_face=37  err=0
+    400/5000  saved=5363  no_face=37  err=0
+    600/5000  saved=5563  no_face=37  err=0
+    800/5000  saved=5763  no_face=37  err=0
+   1000/5000  saved=5963  no_face=37  err=0
+   1200/5000  saved=6163  no_face=37  err=0
+   1400/5000  saved=6363  no_face=37  err=0
+   1600/5000  saved=6563  no_face=37  err=0
+   1800/5000  saved=6763  no_face=37  err=0
+   2000/5000  saved=6963  no_face=37  err=0
+   2200/5000  saved=7163  no_face=37  err=0
+   2400/5000  saved=7363  no_face=37  err=0
+   2600/5000  saved=7563  no_face=37  err=0
+   2800/5000  saved=7763  no_face=37  err=0
+   3000/5000  saved=7962  no_face=38  err=0
+   3200/5000  saved=8162  no_face=38  err=0
+   3400/5000  saved=8362  no_face=38  err=0
+   3600/5000  saved=8562  no_face=38  err=0
+   3800/5000  saved=8762  no_face=38  err=0
+   4000/5000  saved=8962  no_face=38  err=0
+   4200/5000  saved=9162  no_face=38  err=0
+   4400/5000  saved=9362  no_face=38  err=0
+   4600/5000  saved=9562  no_face=38  err=0
+   4800/5000  saved=9762  no_face=38  err=0
+   5000/5000  saved=9962  no_face=38  err=0
+
+Done — ok=9962  skip=0  no_face=38  err=0
+Output: /home/rit/deepfake_project/image/test_data/dfd_frames_cropped

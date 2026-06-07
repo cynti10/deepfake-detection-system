@@ -1,0 +1,188 @@
+[
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs11.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs11.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0015332564944401383,\n  \"fake_probability\": 0.9984667435055599,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs11.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs12.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs12.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0014802804216742516,\n  \"fake_probability\": 0.9985197195783257,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs12.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs27.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs27.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.035066116601228714,\n  \"fake_probability\": 0.9649338833987713,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs27.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs30.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs30.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0328807570040226,\n  \"fake_probability\": 0.9671192429959774,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs30.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs32.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs32.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.001212721224874258,\n  \"fake_probability\": 0.9987872787751257,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs32.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs38.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs38.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.005908665247261524,\n  \"fake_probability\": 0.9940913347527385,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs38.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs39.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs39.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0017173575470224023,\n  \"fake_probability\": 0.9982826424529776,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs39.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs43.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs43.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.9987086057662964,\n  \"fake_probability\": 0.0012913942337036133,\n  \"prediction\": \"real\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs43.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs45.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs45.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.9400738477706909,\n  \"fake_probability\": 0.05992615222930908,\n  \"prediction\": \"real\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs45.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs46.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs46.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.002063155872747302,\n  \"fake_probability\": 0.9979368441272527,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs46.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs47.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs47.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0033418091479688883,\n  \"fake_probability\": 0.9966581908520311,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs47.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs48.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs48.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.997660756111145,\n  \"fake_probability\": 0.0023392438888549805,\n  \"prediction\": \"real\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs48.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs51.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs51.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.005806442350149155,\n  \"fake_probability\": 0.9941935576498508,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs51.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs7.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs7.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0011876701610162854,\n  \"fake_probability\": 0.9988123298389837,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs7.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs9.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\vs9.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0012231084983795881,\n  \"fake_probability\": 0.9987768915016204,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\vs9.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs22.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs22.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0012817102251574397,\n  \"fake_probability\": 0.9987182897748426,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs22.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs23.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs23.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.001197749632410705,\n  \"fake_probability\": 0.9988022503675893,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs23.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs24.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs24.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0016198725206777453,\n  \"fake_probability\": 0.9983801274793223,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs24.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs25.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs25.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0012384055880829692,\n  \"fake_probability\": 0.998761594411917,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs25.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs26.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs26.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.001200030674226582,\n  \"fake_probability\": 0.9987999693257734,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs26.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs28.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs28.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.9563243985176086,\n  \"fake_probability\": 0.04367560148239136,\n  \"prediction\": \"real\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs28.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs29.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs29.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0012002805015072227,\n  \"fake_probability\": 0.9987997194984928,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs29.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs31.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs31.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0014755186857655644,\n  \"fake_probability\": 0.9985244813142344,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs31.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs33.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs33.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0013699464034289122,\n  \"fake_probability\": 0.9986300535965711,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs33.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs40.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs40.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0038354520220309496,\n  \"fake_probability\": 0.996164547977969,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs40.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs42.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs42.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0013443405041471124,\n  \"fake_probability\": 0.9986556594958529,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs42.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs44.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs44.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0017850786680355668,\n  \"fake_probability\": 0.9982149213319644,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs44.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs49.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs49.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0012934597907587886,\n  \"fake_probability\": 0.9987065402092412,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs49.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs50.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs50.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0026111893821507692,\n  \"fake_probability\": 0.9973888106178492,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs50.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs52.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs52.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.001344521646387875,\n  \"fake_probability\": 0.9986554783536121,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs52.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  },
+  {
+    "video": "c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs53.mp4",
+    "stdout": "{\n  \"video\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\uploads\\\\video_1\\\\video_2\\\\vs53.mp4\",\n  \"checkpoint\": \"c:\\\\D-drive\\\\deepfake\\\\deepfake-detection-system\\\\backend\\\\models\\\\video_best_model.pt\",\n  \"frames_used\": 16,\n  \"real_probability\": 0.0012884315801784396,\n  \"fake_probability\": 0.9987115684198216,\n  \"prediction\": \"fake\"\n}\nSaved: c:\\D-drive\\deepfake\\deepfake-detection-system\\backend\\uploads\\video_1\\video_2\\vs53.json",
+    "stderr": "C:\\Users\\Admin\\miniconda3\\Lib\\site-packages\\timm\\models\\_factory.py:138: UserWarning: Mapping deprecated model name tf_efficientnet_b3_ns to current tf_efficientnet_b3.ns_jft_in1k.\n  model = create_fn(",
+    "returncode": 0
+  }
+]

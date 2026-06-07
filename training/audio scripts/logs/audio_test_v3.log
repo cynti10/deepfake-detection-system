@@ -1,0 +1,12 @@
+==============================================================
+  AudioGuard RawNet3-FSAT — External Test
+==============================================================
+Device   : cuda
+torchaudio: 2.6.0+cu124
+Traceback (most recent call last):
+  File "/home/rit/deepfake_project/audio/scripts/test_audio.py", line 177, in <module>
+    model.load_state_dict(ckpt['model_state_dict'], strict=True)
+  File "/home/rit/miniconda/envs/ritaml/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2581, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for RawNet3FSAT:
+	size mismatch for sinc.n_: copying a param with shape torch.Size([1, 125]) from checkpoint, the shape in current model is torch.Size([1, 124]).

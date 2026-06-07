@@ -1,0 +1,2 @@
+nohup: ignoring input
+python: can't open file '/media/rit/New Volume/video_datasets/deeperforensics/DeeperForensics-1.0/preprocess_video_faces.py': [Errno 2] No such file or directory

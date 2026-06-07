@@ -1,0 +1,72 @@
+/home/rit/miniconda/envs/ritaml/lib/python3.10/site-packages/albumentations/__init__.py:24: UserWarning: A new version of Albumentations is available: 2.0.8 (you have 1.4.24). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+  check_for_updates()
+=================================================================
+  ImageGuard v2 — EfficientNet-B4-NS + FFT-MobileNetV3
+=================================================================
+Device      : cuda
+GPU         : NVIDIA A40
+VRAM        : 47.7 GB
+AMP         : True
+Batch size  : 64
+Image size  : 224
+
+Scanning datasets...
+  ai_faces                            real=  2,162  fake=  1,920
+  SKIPPED  : celebdf                             (excluded)
+  celebdf_frames                      real= 36,279  fake=214,198
+  deepdetect                          real= 60,192  fake= 51,993
+  SKIPPED  : deepfake60k                         (excluded)
+  deepfake_real_200k                  real= 95,201  fake= 95,134
+  ff140k                              real= 70,000  fake= 70,000
+  ff_frames                           real= 31,949  fake=159,601
+  SKIPPED  : ff_greatgame                        (excluded)
+  hard_fakes                          real=    589  fake=    700
+
+Total   : 889,918
+Real    : 296,372
+Fake    : 593,546
+Ratio   : 1 : 2.00
+
+Split   — Train : 712,270 | Dev : 28,853 | Eval : 148,795
+Loaders — Train : 11130 batches | Dev : 451 | Eval : 2325
+Trainable params : 19.62M
+
+Resumed from epoch 7 — best AUC 0.9939
+
+=================================================================
+  Starting Training
+=================================================================
+Ep 08/20 | Loss 0.1142 | AUC 0.9789 | Acc 0.9498 | F1 0.9694 | P 0.9711 | R 0.9677
+Ep 09/20 | Loss 0.0807 | AUC 0.9760 | Acc 0.9544 | F1 0.9723 | P 0.9716 | R 0.9730
+Ep 10/20 | Loss 0.0717 | AUC 0.9634 | Acc 0.9424 | F1 0.9655 | P 0.9535 | R 0.9777
+Ep 11/20 | Loss 0.0645 | AUC 0.9628 | Acc 0.9370 | F1 0.9618 | P 0.9578 | R 0.9660
+Ep 12/20 | Loss 0.0602 | AUC 0.9642 | Acc 0.9323 | F1 0.9586 | P 0.9641 | R 0.9532
+
+Early stopping at epoch 12 (no improvement for 5 epochs).
+
+Best Dev AUC : 0.9939
+
+Loading best checkpoint for final evaluation...
+
+=======================================================
+  FINAL EVAL RESULTS (held-out 15%)
+=======================================================
+  AUC       : 0.9989
+  Accuracy  : 0.9902
+  F1        : 0.9923
+  Precision : 0.9930
+  Recall    : 0.9916
+=======================================================
+              precision    recall  f1-score   support
+
+        Real       0.99      0.99      0.99     54576
+        Fake       0.99      0.99      0.99     94219
+
+    accuracy                           0.99    148795
+   macro avg       0.99      0.99      0.99    148795
+weighted avg       0.99      0.99      0.99    148795
+
+
+Checkpoint : /home/rit/deepfake_project/image/checkpoints/imageguard_v2_best.pt
+Metrics    : /home/rit/deepfake_project/image/logs/test_metrics.json
+Train log  : /home/rit/deepfake_project/image/logs/training_log.csv

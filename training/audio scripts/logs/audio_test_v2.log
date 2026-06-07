@@ -1,0 +1,53 @@
+============================================================
+  AudioGuard RawNet3-FSAT — External Test
+============================================================
+Device : cuda
+Weights : loaded strict ✓
+Saved epoch : 26
+Saved AUC   : 0.9995
+
+
+🔴 for_dataset
+   Files    : 5,000  (2,500 real + 2,500 fake)
+   AUC      : 0.5000
+   Accuracy : 0.5000
+   F1       : 0.0000
+              precision    recall  f1-score   support
+
+        Real      0.500     1.000     0.667      2500
+        Fake      0.000     0.000     0.000      2500
+
+    accuracy                          0.500      5000
+   macro avg      0.250     0.500     0.333      5000
+weighted avg      0.250     0.500     0.333      5000
+
+
+🔴 realvsfake_voice
+   Files    : 40  (20 real + 20 fake)
+   AUC      : 0.5000
+   Accuracy : 0.5000
+   F1       : 0.0000
+              precision    recall  f1-score   support
+
+        Real      0.500     1.000     0.667        20
+        Fake      0.000     0.000     0.000        20
+
+    accuracy                          0.500        40
+   macro avg      0.250     0.500     0.333        40
+weighted avg      0.250     0.500     0.333        40
+
+  SKIP wavefake — no labeled samples
+
+==============================================================
+  SUMMARY — AudioGuard RawNet3-FSAT
+==============================================================
+  Dataset                            AUC     Acc      F1  Status
+  ----------------------------------------------------------
+  for_dataset                     0.5000  0.5000  0.0000  🔴 NEED FT
+  realvsfake_voice                0.5000  0.5000  0.0000  🔴 NEED FT
+
+  ✅ GO     = proceed to video model
+  ⚠️  FT    = optional fine-tune overnight
+  🔴 NEED FT = fine-tune before video model
+
+Saved: /home/rit/deepfake_project/audio/logs/audio_test_results.json

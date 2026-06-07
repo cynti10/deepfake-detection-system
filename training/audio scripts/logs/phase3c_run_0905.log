@@ -1,0 +1,27 @@
+nohup: ignoring input
+=================================================================
+  AudioGuard RawNet3 — Phase 3c PGD-Curriculum Hardening
+=================================================================
+Device: cuda | AMP: True
+Curriculum: FGSM-dominant → mixed → PGD-20 dominant
+Input: rawnet3_phase3c.pt  →  Output: rawnet3_phase3d.pt
+
+Loaded Phase 3 checkpoint — Dev AUC 0.9867  Dev Acc 0.9269
+All 59 param groups unfrozen for Phase 3b
+
+=================================================================
+  AudioGuard RawNet3-FSAT — Phase 3b Hardened Adversarial Training
+=================================================================
+Device      : cuda  |  AMP: True
+FGSM ε=0.006  PGD ε=0.012/7-step  F-SAT ε=0.015  adv_ratio=0.3  spec_weight=0.1
+
+Scanning data (cap 80k)...
+  for_dataset                                   real= 84,756  fake= 84,980
+  realvsfake_voice                              real=     20  fake=     60
+  wavefake                                      real= 13,100  fake=134,266
+Mixed   : 80,000 total samples
+Split   : Train 64,002 | Dev 7,999 | Eval 7,999
+
+=================================================================
+  Training
+=================================================================

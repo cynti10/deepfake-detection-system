@@ -1,0 +1,15 @@
+nohup: ignoring input
+usage: train_video_detector.py [-h] --train-manifest TRAIN_MANIFEST
+                               --val-manifest VAL_MANIFEST --test-manifest
+                               TEST_MANIFEST --out-dir OUT_DIR
+                               [--epochs EPOCHS] [--batch-size BATCH_SIZE]
+                               [--num-workers NUM_WORKERS] [--seq-len SEQ_LEN]
+                               [--image-size IMAGE_SIZE] [--lr LR]
+                               [--weight-decay WEIGHT_DECAY]
+                               [--grad-accum GRAD_ACCUM]
+                               [--max-grad-norm MAX_GRAD_NORM]
+                               [--patience PATIENCE] [--d-model D_MODEL]
+                               [--nhead NHEAD] [--num-layers NUM_LAYERS]
+                               [--rgb-backbone RGB_BACKBONE] [--seed SEED]
+                               [--amp] [--export-hard-negatives]
+train_video_detector.py: error: the following arguments are required: --test-manifest, --out-dir

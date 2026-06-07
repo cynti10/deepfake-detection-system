@@ -1,0 +1,8 @@
+nohup: ignoring input
+Extracting:   0%|          | 0/13529 [00:00<?, ?it/s]Extracting:  17%|█▋        | 2244/13529 [00:00<00:00, 22434.14it/s]Extracting:  34%|███▍      | 4584/13529 [00:00<00:00, 22999.31it/s]Extracting:  51%|█████     | 6884/13529 [00:00<00:00, 22979.57it/s]Extracting:  68%|██████▊   | 9213/13529 [00:00<00:00, 23101.10it/s]Extracting:  85%|████████▌ | 11540/13529 [00:00<00:00, 23161.08it/s]Extracting: 100%|██████████| 13529/13529 [00:00<00:00, 23095.55it/s]
+Traceback (most recent call last):
+  File "/home/rit/deepfake_project/video/scripts/preprocess_video_faces.py", line 202, in <module>
+    main()
+  File "/home/rit/deepfake_project/video/scripts/preprocess_video_faces.py", line 184, in main
+    raise RuntimeError("No sequences extracted. Check manifest paths and video accessibility.")
+RuntimeError: No sequences extracted. Check manifest paths and video accessibility.

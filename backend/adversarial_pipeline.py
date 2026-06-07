@@ -621,6 +621,14 @@ class AdversarialBackgroundService:
         if len(adv_pairs) < self.cfg.min_pool_samples:
             return False, f"pool dropped below minimum during cycle ({len(adv_pairs)})"
 
+        adv_real, adv_fake = _count_labels(adv_pairs)
+        if adv_real == 0 or adv_fake == 0:
+            return (
+                False,
+                f"pool class imbalance rejected: real={adv_real}, fake={adv_fake}. "
+                "Need both classes before fine-tune.",
+            )
+
         holdout = _build_holdout(original_pairs, max_per_class=250)
         if len(holdout) < 40:
             return False, "insufficient holdout for AUC gate"
@@ -636,6 +644,14 @@ class AdversarialBackgroundService:
         orig_sample = self._rnd.sample(original_pairs, n_orig)
         train_pairs = orig_sample + adv_pairs
         self._rnd.shuffle(train_pairs)
+
+        tr_real, tr_fake = _count_labels(train_pairs)
+        if tr_real == 0 or tr_fake == 0:
+            return (
+                False,
+                f"train mix invalid after sampling: real={tr_real}, fake={tr_fake}. "
+                "Aborting fine-tune.",
+            )
 
         candidate = _clone_model(model)
         if candidate is None:
@@ -672,6 +688,14 @@ class AdversarialBackgroundService:
         if len(adv_pairs) < self.cfg.min_pool_samples:
             return False, f"pool dropped below minimum during cycle ({len(adv_pairs)})"
 
+        adv_real, adv_fake = _count_labels(adv_pairs)
+        if adv_real == 0 or adv_fake == 0:
+            return (
+                False,
+                f"pool class imbalance rejected: real={adv_real}, fake={adv_fake}. "
+                "Need both classes before fine-tune.",
+            )
+
         holdout = _build_holdout(original_pairs, max_per_class=250)
         if len(holdout) < 40:
             return False, "insufficient holdout for AUC gate"
@@ -687,6 +711,14 @@ class AdversarialBackgroundService:
         orig_sample = self._rnd.sample(original_pairs, n_orig)
         train_pairs = orig_sample + adv_pairs
         self._rnd.shuffle(train_pairs)
+
+        tr_real, tr_fake = _count_labels(train_pairs)
+        if tr_real == 0 or tr_fake == 0:
+            return (
+                False,
+                f"train mix invalid after sampling: real={tr_real}, fake={tr_fake}. "
+                "Aborting fine-tune.",
+            )
 
         candidate = _clone_model(model)
         if candidate is None:
@@ -911,6 +943,12 @@ def _build_holdout(pairs: list[tuple[str, int]], max_per_class: int = 250) -> li
     random.shuffle(real)
     random.shuffle(fake)
     return real[:max_per_class] + fake[:max_per_class]
+
+
+def _count_labels(pairs: list[tuple[str, int]]) -> tuple[int, int]:
+    n_real = sum(1 for _, label in pairs if int(label) == 0)
+    n_fake = sum(1 for _, label in pairs if int(label) == 1)
+    return n_real, n_fake
 
 
 def _make_loader_image(pairs: list[tuple[str, int]]):

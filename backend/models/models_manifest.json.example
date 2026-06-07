@@ -1,0 +1,16 @@
+{
+  "models": [
+    {
+      "filename": "imageguard_v2_finetuned.pt",
+      "url": "https://your-storage.example.com/models/imageguard_v2_finetuned.pt"
+    },
+    {
+      "filename": "rawnet3_fsat_finetuned.pt",
+      "url": "https://your-storage.example.com/models/rawnet3_fsat_finetuned.pt"
+    },
+    {
+      "filename": "video_best_model.pt",
+      "url": "https://your-storage.example.com/models/video_best_model.pt"
+    }
+  ]
+}

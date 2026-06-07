@@ -1,0 +1,17 @@
+Discovered 88394 video files.
+Building manifest:   0%|          | 0/88394 [00:00<?, ?it/s]Building manifest:  10%|▉         | 8423/88394 [00:00<00:00, 84222.85it/s]Building manifest:  19%|█▉        | 16846/88394 [00:00<00:01, 48847.55it/s]Building manifest:  25%|██▌       | 22535/88394 [00:00<00:01, 51473.00it/s]Building manifest:  32%|███▏      | 28223/88394 [00:00<00:01, 53150.30it/s]Building manifest:  38%|███▊      | 33908/88394 [00:00<00:01, 54304.08it/s]Building manifest:  45%|████▍     | 39591/88394 [00:00<00:00, 55078.95it/s]Building manifest:  51%|█████     | 45273/88394 [00:00<00:00, 55610.12it/s]Building manifest:  58%|█████▊    | 50955/88394 [00:00<00:00, 55914.90it/s]Building manifest:  64%|██████▍   | 56638/88394 [00:01<00:00, 56190.50it/s]Building manifest:  72%|███████▏  | 63937/88394 [00:01<00:00, 61260.75it/s]Building manifest:  79%|███████▉  | 70123/88394 [00:01<00:00, 61438.50it/s]Building manifest:  86%|████████▋ | 76304/88394 [00:01<00:00, 57532.84it/s]Building manifest:  93%|█████████▎| 82131/88394 [00:01<00:00, 52224.69it/s]Building manifest:  99%|█████████▉| 87482/88394 [00:01<00:00, 49644.99it/s]Building manifest: 100%|██████████| 88394/88394 [00:01<00:00, 54556.83it/s]
+Saved:
+manifests/video_master_manifest.csv
+manifests/video_train_manifest.csv
+manifests/video_val_manifest.csv
+manifests/video_test_manifest.csv
+
+Counts by split/label:
+split  label
+test   0          450
+       1         1936
+train  0         3556
+       1        15011
+val    0          500
+       1         1828
+dtype: int64

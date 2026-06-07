@@ -1,0 +1,85 @@
+Disabling PyTorch because PyTorch >= 2.4 is required but found 2.2.2
+PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+/home/rit/miniconda/envs/ritaml/lib/python3.10/site-packages/albumentations/__init__.py:24: UserWarning: A new version of Albumentations is available: 2.0.8 (you have 1.4.24). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+  check_for_updates()
+Model loaded — Phase 1 AUC 0.9986
+
+============================================================
+  ImageGuard v2 — Quick External Test (5k cap/dataset)
+============================================================
+
+🟢 ciplab_faces
+   Images  : 3,840 (1,920 real + 1,920 fake)
+   AUC     : 0.9937
+   Accuracy: 0.9682
+   F1      : 0.9679
+              precision    recall  f1-score   support
+
+        Real      0.960     0.977     0.969      1920
+        Fake      0.977     0.959     0.968      1920
+
+    accuracy                          0.968      3840
+   macro avg      0.968     0.968     0.968      3840
+weighted avg      0.968     0.968     0.968      3840
+
+
+🔴 dfd_frames
+   Images  : 5,000 (2,500 real + 2,500 fake)
+   AUC     : 0.5222
+   Accuracy: 0.5076
+   F1      : 0.2124
+              precision    recall  f1-score   support
+
+        Real      0.504     0.882     0.642      2500
+        Fake      0.530     0.133     0.212      2500
+
+    accuracy                          0.508      5000
+   macro avg      0.517     0.508     0.427      5000
+weighted avg      0.517     0.508     0.427      5000
+
+
+🔴 dfd_frames_cropped
+   Images  : 5,000 (2,500 real + 2,500 fake)
+   AUC     : 0.8187
+   Accuracy: 0.7342
+   F1      : 0.6820
+              precision    recall  f1-score   support
+
+        Real      0.676     0.898     0.772      2500
+        Fake      0.849     0.570     0.682      2500
+
+    accuracy                          0.734      5000
+   macro avg      0.763     0.734     0.727      5000
+weighted avg      0.763     0.734     0.727      5000
+
+
+🟢 wilddeepfake
+   Images  : 5,000 (2,500 real + 2,500 fake)
+   AUC     : 0.9994
+   Accuracy: 0.9918
+   F1      : 0.9918
+              precision    recall  f1-score   support
+
+        Real      0.990     0.994     0.992      2500
+        Fake      0.994     0.990     0.992      2500
+
+    accuracy                          0.992      5000
+   macro avg      0.992     0.992     0.992      5000
+weighted avg      0.992     0.992     0.992      5000
+
+
+============================================================
+  SUMMARY
+============================================================
+  Dataset                            AUC     Acc      F1  Status
+  --------------------------------------------------------
+  ciplab_faces                    0.9937  0.9682  0.9679  ✅ GO
+  dfd_frames                      0.5222  0.5076  0.2124  🔴 NEED FT
+  dfd_frames_cropped              0.8187  0.7342  0.6820  🔴 NEED FT
+  wilddeepfake                    0.9994  0.9918  0.9918  ✅ GO
+
+  ✅ GO     = proceed to video model
+  ⚠️  FT    = optional fine-tune overnight
+  🔴 NEED FT = fine-tune before video model
+
+Saved: /home/rit/deepfake_project/image/logs/quick_test_results.json

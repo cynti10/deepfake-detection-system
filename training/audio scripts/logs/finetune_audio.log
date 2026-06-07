@@ -1,0 +1,47 @@
+=================================================================
+  AudioGuard RawNet3-FSAT — Phase 2 Fine-Tune
+=================================================================
+Device : cuda
+
+Scanning original training data (sample 80k)...
+  asvspoof2019                                  real=      0  fake=363,355
+  in_the_wild                                   real=      0  fake= 31,779
+  multi_vocoder                                 real=    736  fake=  1,825
+  wavefake                                      real=      9  fake=     57
+
+Scanning hard/FoR datasets...
+  for_dataset                                   real= 84,756  fake= 84,980
+  realvsfake_voice                              real=     20  fake=     60
+  wavefake                                      real= 13,100  fake=134,266
+
+Original pool : 80,000
+Hard pool     : 317,182
+Mixed train   : 80,000 original + 317,182 hard = 397,182
+Split         : Train 317,748 | Dev 39,717 | Eval 39,717
+
+Loaded Phase 1 — AUC 0.9995
+Frozen 24/59 param groups
+
+=================================================================
+  Training
+=================================================================
+Ep 01/8 | Loss 0.4429 | AUC 0.9521 | Acc 0.8586 | F1 0.9002  ✓ saved
+Ep 02/8 | Loss 0.2715 | AUC 0.9701 | Acc 0.8989 | F1 0.9305  ✓ saved
+Ep 03/8 | Loss 0.2289 | AUC 0.9800 | Acc 0.9087 | F1 0.9368  ✓ saved
+Ep 04/8 | Loss 0.1989 | AUC 0.9831 | Acc 0.9270 | F1 0.9503  ✓ saved
+Ep 05/8 | Loss 0.1816 | AUC 0.9863 | Acc 0.9318 | F1 0.9534  ✓ saved
+Ep 06/8 | Loss 0.1688 | AUC 0.9822 | Acc 0.8770 | F1 0.9117
+Ep 07/8 | Loss 0.1615 | AUC 0.9860 | Acc 0.9306 | F1 0.9525
+Ep 08/8 | Loss 0.1571 | AUC 0.9889 | Acc 0.9415 | F1 0.9603  ✓ saved
+
+Best Fine-Tune Dev AUC : 0.9889
+
+=======================================================
+  PHASE 2 FINAL EVAL
+=======================================================
+  AUC       : 0.9896
+  Accuracy  : 0.9426
+  F1        : 0.9611
+
+Checkpoint : /home/rit/deepfake_project/audio/checkpoints/rawnet3_fsat_finetuned.pt
+Metrics    : /home/rit/deepfake_project/audio/logs/finetune_audio_metrics.json

@@ -1,0 +1,67 @@
+==============================================================
+  AudioGuard RawNet3-FSAT — External Test
+==============================================================
+Device   : cuda
+torchaudio: 2.6.0+cu124
+Weights  : strict ✓
+Epoch    : 26  |  Saved AUC: 0.9995
+
+Sanity check (1 file):
+  File  : recording15531.wav_norm_mono.wav
+  Wave  : min=-1.0000  max=0.9809  zeros=38282
+  Logit : -3.9402  →  P(fake)=0.0191
+
+==============================================================
+  for_dataset                         real=84,756  fake=84,980
+
+🔴 for_dataset
+   Files     : 5,000  (2,500 real + 2,500 fake)
+   AUC       : 0.6187
+   Accuracy  : 0.5020
+   F1        : 0.0095
+   Precision : 0.8571  |  Recall : 0.0048
+              precision    recall  f1-score   support
+
+        Real      0.501     0.999     0.667      2500
+        Fake      0.857     0.005     0.010      2500
+
+    accuracy                          0.502      5000
+   macro avg      0.679     0.502     0.338      5000
+weighted avg      0.679     0.502     0.338      5000
+
+  realvsfake_voice                    real=    20  fake=    60
+
+🔴 realvsfake_voice
+   Files     : 40  (20 real + 20 fake)
+   AUC       : 0.7725
+   Accuracy  : 0.5000
+   F1        : 0.0000
+   Precision : 0.0000  |  Recall : 0.0000
+              precision    recall  f1-score   support
+
+        Real      0.500     1.000     0.667        20
+        Fake      0.000     0.000     0.000        20
+
+    accuracy                          0.500        40
+   macro avg      0.250     0.500     0.333        40
+weighted avg      0.250     0.500     0.333        40
+
+  wavefake                            real=     0  fake=134,266
+
+  SKIP wavefake — 0 real or 0 fake  (real=0, fake=134266)
+
+Total load failures : 0
+
+==============================================================
+  SUMMARY — AudioGuard RawNet3-FSAT
+==============================================================
+  Dataset                            AUC     Acc      F1  Status
+  ----------------------------------------------------------
+  for_dataset                     0.6187  0.5020  0.0095  🔴 NEED FT
+  realvsfake_voice                0.7725  0.5000  0.0000  🔴 NEED FT
+
+  ✅ GO     = proceed to video model
+  ⚠️  FT    = optional fine-tune overnight
+  🔴 NEED FT = fine-tune before video model
+
+Saved: /home/rit/deepfake_project/audio/logs/audio_test_results.json

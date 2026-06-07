@@ -76,14 +76,15 @@ def main():
 
     with torch.no_grad():
         with autocast(device_type=device.type, enabled=amp_enabled):
-            prob = torch.sigmoid(model(x)).item()
+            real_probability = torch.sigmoid(model(x)).item()
 
     result = {
         "video": str(Path(args.video)),
         "checkpoint": str(Path(args.checkpoint)),
         "frames_used": int(args.frames),
-        "fake_probability": float(prob),
-        "prediction": "fake" if prob >= 0.5 else "real",
+        "real_probability": float(real_probability),
+        "fake_probability": float(1.0 - real_probability),
+        "prediction": "real" if real_probability >= 0.5 else "fake",
     }
 
     print(json.dumps(result, indent=2))

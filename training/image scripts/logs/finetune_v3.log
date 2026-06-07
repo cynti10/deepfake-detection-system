@@ -1,0 +1,72 @@
+Disabling PyTorch because PyTorch >= 2.4 is required but found 2.2.2
+PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+/home/rit/miniconda/envs/ritaml/lib/python3.10/site-packages/albumentations/__init__.py:24: UserWarning: A new version of Albumentations is available: 2.0.8 (you have 1.4.24). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+  check_for_updates()
+=================================================================
+  ImageGuard v2 — Phase 2 Fine-Tune
+=================================================================
+Device     : cuda
+GPU        : NVIDIA A40
+LR         : 5e-05  (was 2e-4 in Phase 1)
+Hard ratio : 30% hard + 70% original
+Freeze     : bottom 45% of spatial backbone
+
+Scanning original training data (sample)...
+  ai_faces                            real=  2,162  fake=  1,920
+  celebdf_frames                      real= 36,279  fake=214,198
+  deepdetect                          real= 60,192  fake= 51,993
+  deepfake_real_200k                  real= 95,201  fake= 95,134
+  ff140k                              real= 70,000  fake= 70,000
+  ff_frames                           real= 31,949  fake=159,601
+  hard_fakes                          real=    589  fake=    700
+
+Scanning hard/OOD datasets...
+  ciplab_faces                        real=  2,162  fake=  1,920
+  dfd                                 real=      0  fake=      0
+  dfd_frames_cropped                  real=  4,963  fake=  4,999
+  wilddeepfake                        real= 97,055  fake= 92,658
+
+Original pool : 889,918
+Hard pool     : 203,757
+
+Mixed train   : 87,324 original + 203,757 hard = 291,081 total
+Split         : Train 242,181 | Dev 24,450 | Eval 24,450
+
+Loading Phase 1 checkpoint: /home/rit/deepfake_project/image/checkpoints/imageguard_v2_best.pt
+Phase 1 Dev AUC was: 0.9939
+Frozen 187/562 param groups (bottom 45% of spatial backbone)
+
+=================================================================
+  Phase 2 Fine-Tuning
+=================================================================
+Ep 01/7 | Loss 0.3339 | AUC 0.9867 | Acc 0.9478 | F1 0.9463  ✓ saved
+Ep 02/7 | Loss 0.2013 | AUC 0.9961 | Acc 0.9723 | F1 0.9713  ✓ saved
+Ep 03/7 | Loss 0.1589 | AUC 0.9980 | Acc 0.9813 | F1 0.9808  ✓ saved
+Ep 04/7 | Loss 0.1352 | AUC 0.9987 | Acc 0.9856 | F1 0.9852  ✓ saved
+Ep 05/7 | Loss 0.1232 | AUC 0.9991 | Acc 0.9877 | F1 0.9874  ✓ saved
+Ep 06/7 | Loss 0.1138 | AUC 0.9991 | Acc 0.9882 | F1 0.9879  ✓ saved
+Ep 07/7 | Loss 0.1082 | AUC 0.9992 | Acc 0.9892 | F1 0.9889  ✓ saved
+
+Best Fine-Tune Dev AUC : 0.9992
+
+=======================================================
+  PHASE 2 FINAL EVAL RESULTS
+=======================================================
+  AUC       : 0.9992
+  Accuracy  : 0.9877
+  F1        : 0.9874
+  Precision : 0.9884
+  Recall    : 0.9864
+=======================================================
+              precision    recall  f1-score   support
+
+        Real       0.99      0.99      0.99     12501
+        Fake       0.99      0.99      0.99     11949
+
+    accuracy                           0.99     24450
+   macro avg       0.99      0.99      0.99     24450
+weighted avg       0.99      0.99      0.99     24450
+
+
+Fine-tuned checkpoint : /home/rit/deepfake_project/image/checkpoints/imageguard_v2_finetuned.pt
+Metrics               : /home/rit/deepfake_project/image/logs/finetune_test_metrics.json

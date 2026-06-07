@@ -1,0 +1,22 @@
+nohup: ignoring input
+Disabling PyTorch because PyTorch >= 2.4 is required but found 2.2.2
+PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+/home/rit/miniconda/envs/ritaml/lib/python3.10/site-packages/albumentations/__init__.py:24: UserWarning: A new version of Albumentations is available: 2.0.8 (you have 1.4.24). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+  check_for_updates()
+=================================================================
+  ImageGuard v2 — EfficientNet-B4-NS + FFT-MobileNetV3
+=================================================================
+Device      : cuda
+GPU         : NVIDIA A40
+VRAM        : 47.7 GB
+AMP         : True
+Batch size  : 64
+Image size  : 224
+
+Scanning datasets...
+Traceback (most recent call last):
+  File "/home/rit/deepfake_project/image/scripts/train_image.py", line 118, in <module>
+    for droot in sorted(DATA_DIR.iterdir()):
+  File "/home/rit/miniconda/envs/ritaml/lib/python3.10/pathlib.py", line 1017, in iterdir
+    for name in self._accessor.listdir(self):
+FileNotFoundError: [Errno 2] No such file or directory: '/home/rit/deepfake_project/image/data'
